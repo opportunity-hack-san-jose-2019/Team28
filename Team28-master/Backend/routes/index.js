@@ -61,4 +61,23 @@ router.get('/services/:location',function(req,res){
   
  })
 
+
+ router.get('/services/categories/:category',function(req,res){
+
+  console.log("Category Service "+req.params.category)
+  
+  FederalService.find({
+    Category : req.params.category
+  },
+   function(err,service){
+     console.log("Category Service "+service)
+     if(err)
+       res.send(err)
+     else
+       res.send(service)
+   });
+  
+  
+ })
+
 module.exports = router;
