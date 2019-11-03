@@ -11,26 +11,41 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login',function(req,res,next){
-  
+  console.log(req.body.email);
   User.findOne({
     'email' : req.body.email,
   },(err,user)=>
   {
-    console.log(user)
-      // if(err)
-      //   res.send(err);
-      // else
-      // {
-      //   console.log(user.password)
+      
+      if(err)
+        {
+          
+          res.send(err) }
+     else
+       {
+         if(user) {
+       
       if (!bcrypt.compareSync(req.body.password, user.password)) {    
               
-          console.log('Invalid Credentials!');
-          res.send("Invalid Credentials");             
+        console.log("Error in creating Course.", err);
+        res.writeHead(204, {
+            'Content-type': 'text/plain'
+        });
+        res.end('Error');           
         }
       else
-      {
+      { 
+        console.log("User Found");
           res.send(user)
       }
+    } else {
+      console.log("Error in creating Course.", err);
+      res.writeHead(204, {
+          'Content-type': 'text/plain'
+      });
+      res.end('Error');
+    }
+    }
       
   })
 })

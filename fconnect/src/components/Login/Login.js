@@ -16,7 +16,6 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
       password: "",
       name : "",
       authFlag : false,
@@ -51,75 +50,38 @@ export default class Login extends Component {
     }
 
     axios.defaults.withCredentials = true;
-    axios.post(`${ROOT_URL}/users/login`, JSON.stringify(data))
+    axios.post(`${ROOT_URL}/users/login`, data)
     .then(res => {
-      var resultData = res.data[0];
-
-      console.log("Inside Login" + resultData);
-      if(res.data[0]){
+      console.log(res.status +  "Resulyt bkwsde");
+     // var resultData = res.data[0];
+      if(res.status === 200){
+     
         console.log("Correct Login");
       //localStorage.setItem('token', resultData.x);
-      localStorage.setItem('name' , resultData.email);
-      localStorage.setItem('userType' , resultData.role);
+      localStorage.setItem('name' , res.email);
+      localStorage.setItem('userType' , res.role);
       this.setState({
         authFlag : true
     }) 
     this.props.history.push('/userPage') }  else {
-      if(res.status === 200){
+     
         console.log("Invaid Login");
         this.setState({
             authFlag : false,
             errorMessage : "Invalid Login",
-            email: "",
+        
             password: "",
             name : "",
         })
       }
-    }
+    
      
     });
   
   }
 
-  /*signInStudent = event => {
-    event.preventDefault();
-
-    //Creating data to be sent
-    var data = {
-      password : this.state.password,
-      name : this.state.name
-    }
-
-    axios.defaults.withCredentials = true;
-    axios.post('http://localhost:3001/users/login', JSON.stringify(data))
-    .then(res => {
-      var resultData = res.data[0];
-
-      console.log("Inside Login" + resultData);
-      if(res.data[0]){
-        console.log("Correct Login");
-      localStorage.setItem('token', resultData.x);
-      localStorage.setItem('name' , resultData.name);
-      localStorage.setItem('userType' , resultData.userType);
-      this.setState({
-        authFlag : true
-    }) 
-    this.props.history.push('/home/courses') }  else {
-      if(res.status === 200){
-        console.log("Invaid Login");
-        this.setState({
-            authFlag : false,
-            errorMessage : "Invalid Login",
-            email: "",
-            password: "",
-            name : "",
-        })
-      }
-    }
-     
-    });
   
-  } */
+     
 
 
   render(){
