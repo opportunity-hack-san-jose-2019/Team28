@@ -53,28 +53,44 @@ export default class HomeCourses extends Component {
     }
 
    
-    render(){
-        var card = this.state.services.map(data => {
+    render() {
 
-            return (<div class = "col-sm-3">
-            <div class="card" id={data.name} onClick= {this.openService} style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
-            <div class="card-body" id={data.name}  onClick= {this.openService} style = {{backgroundColor : randomColor(), height : 130}}>
-            
-        </div>
-<h4 class="card-subtitle md-2 py-3 text-muted"  id={data.name}  onClick= {this.openService} style= {{height : 50}}> <b>{data.name} </b></h4>
-<p class="card-text" id={data.name}  onClick= {this.openService}  > </p>
+        let loggedIn = (localStorage.getItem("name") === null);
+        if (loggedIn) {
+            return (<Redirect to='/'/>);
+        }
+        else {
+            const card = this.state.services.map(data => {
+
+                return (<div class="col-sm-3">
+                    <div class="card" id={data.name} onClick={this.openService} style={{
+                        width: 302,
+                        marginLeft: 5,
+                        marginRight: 5,
+                        height: 202,
+                        marginTop: 5,
+                        marginBottom: 5
+                    }}>
+                        <div class="card-body" id={data.name} onClick={this.openService}
+                             style={{backgroundColor: randomColor(), height: 130}}>
+
+                        </div>
+                        <h4 class="card-subtitle md-2 py-3 text-muted" id={data.name} onClick={this.openService}
+                            style={{height: 50}}><b>{data.name} </b></h4>
+                        <p class="card-text" id={data.name} onClick={this.openService}></p>
 
 
-</div>
-            </div> )
+                    </div>
+                </div>)
 
-        })
-       return (
-           <div class="category">
-        {card}
- </div>
-       );
-}
+            });
+            return (
+                <div class="category">
+                    {card}
+                </div>
+            );
+        }
+    }
 }
 
 

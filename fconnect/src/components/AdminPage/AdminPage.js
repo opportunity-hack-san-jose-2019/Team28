@@ -5,6 +5,8 @@ import cookie from 'react-cookies';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {ROOT_URL} from '../../URLSettings';
+import {States} from '../../URLSettings';
+
 
 
 
@@ -106,87 +108,99 @@ export default class AdminPage extends Component {
 
  
 
-  render(){
+  render() {
+      let loggedIn = (localStorage.getItem("name") === null);
+      if (loggedIn) {
+          return (<Redirect to='/'/>);
+      }
+      else {
 
-    const options = this.state.categories.map(item => {
-        return <option> {item.name} </option>
-    })
+          const options = this.state.categories.map(item => {
+              return <option> {item.name} </option>
+          })
 
-   
-    return (
+          const states = States.map(item => {
+              return <option> {item} </option>
+          })
 
-
-      <div className = "LoginPage - Component">
-      
-      <div className="Login">
-     <div>
-       <h2 align = "center">Add a Service</h2>
-     </div>
-        <form  align= "center">
+          return (
 
 
-        
-          
-          <Form.Group controlId="serviceName" >
-            <Form.Label>Service Name</Form.Label>
-            <Form.Control
-              autoFocus
-              type="serviceName"
-              value={this.state.serviceName}
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="location" >
-            <Form.Label>Location</Form.Label>
-            <Form.Control
-              value={this.state.location}
-              onChange={this.handleChange}
-              type="location"
-            />
-          </Form.Group>
-          <Form.Group controlId="description" >
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              value={this.state.description}
-              onChange={this.handleChange}
-              type="text"
-            />
-          </Form.Group>
+              <div className="LoginPage - Component">
 
-          <Form.Group controlId="url" >
-            <Form.Label>URL</Form.Label>
-            <Form.Control
-              value={this.state.url}
-              onChange={this.handleChange}
-              type="text"
-            />
-          </Form.Group>
+                  <div className="Login">
+                      <div>
+                          <h2 align="center">Add a Service</h2>
+                      </div>
+                      <form align="center">
 
-          <Form.Group controlId="category" >
-            <Form.Label>Category</Form.Label>
-            <Form.Control as="select" onChange={this.handleChange}>
-                {options} 
-                
-            </Form.Control>
-           
-          </Form.Group>
-         
-        <fieldset>
-  
-      </fieldset>
 
-          <Button
-            block
-           disabled={!this.validateForm()}
-            type="button"  onClick = {this.signUpStudent}
-          >
-           Create a new service
-          </Button>
+                          <Form.Group controlId="serviceName">
+                              <Form.Label>Service Name</Form.Label>
+                              <Form.Control
+                                  autoFocus
+                                  type="serviceName"
+                                  value={this.state.serviceName}
+                                  onChange={this.handleChange}
+                              />
+                          </Form.Group>
+                          <Form.Group controlId="location">
+                              <Form.Label>Location</Form.Label>
+                              {/*<Form.Control*/}
+                                  {/*value={this.state.location}*/}
+                                  {/*onChange={this.handleChange}*/}
+                                  {/*type="location"*/}
+                              {/*/>*/}
+                              <Form.Control as="select" onChange={this.handleChange}>
+                                  <option> Please select a state </option>
+                                  {states}
 
-          
-        </form>
-      </div>
-      </div>
-    );
+                              </Form.Control>
+                          </Form.Group>
+                          <Form.Group controlId="description">
+                              <Form.Label>Description</Form.Label>
+                              <Form.Control
+                                  value={this.state.description}
+                                  onChange={this.handleChange}
+                                  type="text"
+                              />
+                          </Form.Group>
+
+                          <Form.Group controlId="url">
+                              <Form.Label>URL</Form.Label>
+                              <Form.Control
+                                  value={this.state.url}
+                                  onChange={this.handleChange}
+                                  type="text"
+                              />
+                          </Form.Group>
+
+                          <Form.Group controlId="category">
+                              <Form.Label>Category</Form.Label>
+                              <Form.Control as="select" onChange={this.handleChange}>
+                                  {options}
+
+                              </Form.Control>
+
+                          </Form.Group>
+
+                          <fieldset>
+
+                          </fieldset>
+
+                          <Button
+                              block
+                              disabled={!this.validateForm()}
+                              type="button" onClick={this.signUpStudent}
+                          >
+                              Create a new service
+                          </Button>
+
+
+                      </form>
+                  </div>
+              </div>
+          );
+      }
   }
 }

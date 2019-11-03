@@ -29,6 +29,8 @@ class Main extends Component {
                 <Route path="/service/:id" component={servicePage}></Route>
                 <Route path="/serviceDetails/:id" component={editservicePage}></Route>
                 <Route path="/serviceDelete/:id" component={servicePage}></Route>
+                <Route path="/stateServices/:id" component={servicePage}></Route>
+
             </div>
             </BrowserRouter>
         )

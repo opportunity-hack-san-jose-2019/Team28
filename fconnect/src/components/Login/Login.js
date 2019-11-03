@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import cookie from 'react-cookies';
-import { Link } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
 import GoogleLogin from "react-google-login";
@@ -82,104 +82,110 @@ export default class Login extends Component {
      
 
 
-  render(){
+  render() {
+      let loggedIn = (localStorage.getItem("name") === null);
+      if (!loggedIn) {
+          return (<Redirect to='/userPage'/>);
+      }
+      else {
 
-      const responseGoogle = (response) => {
-          var data = {
-              email : response.profileObj.email,
-              username : response.profileObj.name
+          const responseGoogle = (response) => {
+              var data = {
+                  email: response.profileObj.email,
+                  username: response.profileObj.name
+              }
+              console.log(response.profileObj);
+              console.log('data:' + data);
+
+              axios.defaults.withCredentials = true;
+              axios.post(`${ROOT_URL}/users/signupWithGoogle`, data)
+                  .then(res => {
+                      console.log(res.status + "Resulyt bkwsde");
+                      // var resultData = res.data[0];
+                      if (res.status === 200) {
+
+                          console.log("Correct Login");
+                          //localStorage.setItem('token', resultData.x);
+                          localStorage.setItem('name', res.email);
+                          localStorage.setItem('userType', 'user');
+                          this.setState({
+                              authFlag: true
+                          })
+                          this.props.history.push('/userPage')
+                      }
+                      else {
+
+                          console.log("Invaid Login");
+                          this.setState({
+                              authFlag: false,
+                              errorMessage: "Invalid Login",
+
+                              password: "",
+                              name: "",
+                          })
+                      }
+                  });
           }
-          console.log(response.profileObj) ;
-          console.log('data:'+ data);
 
-          axios.defaults.withCredentials = true;
-          axios.post(`${ROOT_URL}/users/signupWithGoogle`, data)
-              .then(res => {
-                  console.log(res.status +  "Resulyt bkwsde");
-                  // var resultData = res.data[0];
-                  if(res.status === 200){
+          const failureGoogle = (response) => {
+              alert("Login using Google Failed. Please check console for more details.");
+              console.log(response);
+          }
 
-                      console.log("Correct Login");
-                      //localStorage.setItem('token', resultData.x);
-                      localStorage.setItem('name' , res.email);
-                      localStorage.setItem('userType' , 'user');
-                      this.setState({
-                          authFlag : true
-                      })
-                      this.props.history.push('/userPage')
-                  }
-                  else {
+          return (
+              <div className="Fullpage">
+                  <div className="LoginPage" align="center">
+                      <div className="Login">
+                          <div>
+                              <h2> Welcome to F-Connect </h2>
+                          </div>
+                          <form align="center">
 
-                      console.log("Invaid Login");
-                      this.setState({
-                          authFlag : false,
-                          errorMessage : "Invalid Login",
+                              <Form.Group controlId="name">
+                                  <Form.Control
+                                      value={this.state.name}
+                                      placeholder="Email"
+                                      onChange={this.handleChange}
+                                      type="text"
+                                  />
+                              </Form.Group>
+                              <Form.Group controlId="password">
+                                  <Form.Control
+                                      placeholder="Password"
+                                      value={this.state.password}
+                                      onChange={this.handleChange}
+                                      type="password"
+                                  />
+                              </Form.Group>
 
-                          password: "",
-                          name : "",
-                      })
-                  }
-            });
+
+                              <Button
+                                  block
+
+                                  //disabled={!this.validateForm()}
+                                  onClick={this.signInStudent}
+                                  type="button"
+                              >
+                                  Sign In
+                              </Button>
+
+                              Not a Member? <Link to="/signup">Signup</Link>
+                              <p>  {this.state.errorMessage}</p>
+
+                              <br/>
+                              <br/>
+
+                              <GoogleLogin
+                                  clientId="309202928063-nqs6chp8a40e41dgmom5rh3dimg8akcd.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
+                                  buttonText="LOGIN WITH GOOGLE"
+                                  onSuccess={responseGoogle}
+                                  onFailure={failureGoogle}
+                              />
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          );
       }
-
-      const failureGoogle = (response) => {
-          alert("Login using Google Failed. Please check console for more details.");
-          console.log(response);
-      }
-
-    return (
-      <div className = "Fullpage">
-      <div className ="LoginPage" align = "center" >
-      <div className="Login">
-     <div>
-       <h2> Welcome to F-Connect </h2>
-      </div>
-        <form  align= "center">
-
-        <Form.Group controlId="name" >
-            <Form.Control
-              value={this.state.name}
-              placeholder = "Email"
-              onChange={this.handleChange}
-              type="text"
-            />
-          </Form.Group>
-          <Form.Group controlId="password" >
-            <Form.Control
-            placeholder = "Password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </Form.Group>
-          
-          
-          <Button
-            block
-           
-            //disabled={!this.validateForm()}
-            onClick = {this.signInStudent}
-            type="button"
-          >
-            Sign In 
-          </Button>
-         
-          Not a Member?  <Link to="/signup">Signup</Link>
-          <p>  {this.state.errorMessage}</p>
-
-          <br />
-          <br />
-
-            <GoogleLogin
-                clientId="309202928063-nqs6chp8a40e41dgmom5rh3dimg8akcd.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
-                buttonText="LOGIN WITH GOOGLE"
-                onSuccess={responseGoogle}
-                onFailure={failureGoogle}
-            />
-        </form>
-      </div>
-      </div>
-      </div>
-    );
   }
 }
