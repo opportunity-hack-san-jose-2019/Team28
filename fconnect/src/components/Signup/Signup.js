@@ -118,8 +118,8 @@ export default class signUp extends Component {
               <fieldset>
               <div onChange={this.setUserType.bind(this)}>
               I am a &nbsp;
-                <input type="radio" value="student" name="gender"/> User &nbsp;
-                <input type="radio" value="faculty" name="gender"/> Admin
+                <input type="radio" value="user" name="gender"/> User &nbsp;
+                <input type="radio" value="mentor" name="gender"/> Mentor
               </div>
               </fieldset>
 

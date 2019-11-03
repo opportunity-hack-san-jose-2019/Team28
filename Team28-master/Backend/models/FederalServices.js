@@ -23,7 +23,11 @@ var FederalSchema = new Schema({
   Category : {
       type : String,
       require:true
-  }
+  },
+  Email : {
+    type : String,
+    require:true
+}
 });
 var FederalServices = mongoose.model('FederalService', FederalSchema);
 module.exports = FederalServices;
