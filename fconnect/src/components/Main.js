@@ -10,11 +10,8 @@ import userPage from './UserPage/UserPage';
 import adminPage from './AdminPage/AdminPage';
 import servicePage from './ServicePage/ServicePage';
 import editservicePage from './ServicePage/EditService';
-<<<<<<< Updated upstream
 import viewMyServices from './AdminPage/ViewServices';
-=======
 import CategoryPage from './CategoryPage/CategoryPage'
->>>>>>> Stashed changes
 
 
 
@@ -34,12 +31,9 @@ class Main extends Component {
                 <Route path="/service/:id" component={servicePage}></Route>
                 <Route path="/serviceDetails/:id" component={editservicePage}></Route>
                 <Route path="/serviceDelete/:id" component={servicePage}></Route>
-<<<<<<< Updated upstream
                 <Route path="/viewServices" component={viewMyServices}></Route>
-=======
                 <Route path="/newCategory" component={CategoryPage}></Route>
 
->>>>>>> Stashed changes
             </div>
             </BrowserRouter>
         )
