@@ -11,9 +11,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login',function(req,res,next){
-  console.log("Request body"+req.body.password);
+  
   User.findOne({
-    'username' : req.body.username,
+    'email' : req.body.email,
   },(err,user)=>
   {
     console.log(user)
@@ -22,7 +22,8 @@ router.post('/login',function(req,res,next){
       // else
       // {
       //   console.log(user.password)
-      if (!bcrypt.compareSync(req.body.password, user.password)) {                
+      if (!bcrypt.compareSync(req.body.password, user.password)) {    
+              
           console.log('Invalid Credentials!');
           res.send("Invalid Credentials");             
         }
