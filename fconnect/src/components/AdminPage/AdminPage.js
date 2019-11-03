@@ -100,7 +100,7 @@ export default class AdminPage extends Component {
     axios.post(`${ROOT_URL}/addService`, data)
     .then(res => {
       console.log("In Admin Page")  
-      this.props.history.push('/');
+      this.props.history.push('/viewServices');
     });
   
   }
