@@ -1,0 +1,29 @@
+.navbar
+{
+    background: #ffffff !important;
+}
+
+.navbar .nav-item .dropdown-menu
+{
+    /*background: #000000 !important;*/
+    /*color: #000;*/
+}
+
+.navbar .navbar-opaque
+{
+    background: #fff !important;
+}
+
+.navbar .nav-item .nav-link
+{
+    color: black;
+    font-family: Lato,Arial,Helvetica Neue,sans-serif;
+    line-height: 1.5rem;
+    min-height: 48px;
+
+}
+
+.navbar .nav-item .btn {
+    background-color: blue;
+    border-color: blue;
+}

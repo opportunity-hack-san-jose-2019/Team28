@@ -8,6 +8,7 @@ import './Login.css';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import Background from '../../images/Background.jpg';
+import Navbarhome from "../NavBar/Navbarhome";
 
 
 export default class Login extends Component {
@@ -124,13 +125,8 @@ export default class Login extends Component {
    
     return (
       <div className = "Fullpage">
-      <div className = "LoginPage" align = "center" >
-      { /* {redirectVar} */ }
+      <div className ="LoginPage" align = "center" >
       <div className="Login">
-     
-     <div>
-    
-      </div>
         <form  align= "center" style={{marginTop : "100"}}>
         <Form.Group controlId="name" >
             <Form.Control
