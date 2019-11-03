@@ -6,17 +6,18 @@ import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 import logo from "../../images/Logo.png"
 import Navbarhome from "../NavBar/Navbarhome";
 import {Route} from "react-router-dom";
+import SlideshowComponent from "../SlideShow/App"
+import Footer from "../Footer/Footer";
+import About from "../About/About";
 
 export default class LandingPage extends Component {
   render() {
 
     return (
         <div>
-              <Carousel showThumbs={false} infiniteLoop={true}>
-                <div style={{ height: "700px", color: "#fff" }}>this is slide 1</div>
-                <div style={{ height: "700px", color: "#fff" }}>this is slide 2</div>
-                <div style={{ height: "700px", color: "#fff" }}>this is slide 3</div>
-              </Carousel>x
+            <SlideshowComponent />
+            <About />
+            <Footer />
       </div>
     );
   }
