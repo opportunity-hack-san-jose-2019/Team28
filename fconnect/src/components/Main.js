@@ -11,6 +11,7 @@ import adminPage from './AdminPage/AdminPage';
 import servicePage from './ServicePage/ServicePage';
 import editservicePage from './ServicePage/EditService';
 import viewMyServices from './AdminPage/ViewServices';
+import CategoryPage from './CategoryPage/CategoryPage'
 
 
 
@@ -31,6 +32,8 @@ class Main extends Component {
                 <Route path="/serviceDetails/:id" component={editservicePage}></Route>
                 <Route path="/serviceDelete/:id" component={servicePage}></Route>
                 <Route path="/viewServices" component={viewMyServices}></Route>
+                <Route path="/newCategory" component={CategoryPage}></Route>
+
             </div>
             </BrowserRouter>
         )
