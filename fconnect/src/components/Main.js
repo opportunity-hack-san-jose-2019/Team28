@@ -6,6 +6,7 @@ import signUp from './Signup/Signup';
 import landingPage from './LandingPage/LandingPage';
 import userPage from './UserPage/UserPage';
 import adminPage from './AdminPage/AdminPage';
+import servicePage from './ServicePage/ServicePage';
 
 
 
@@ -20,7 +21,8 @@ class Main extends Component {
                 <Route path="/"  exact component={landingPage}/>
                 <Route path="/signUp" component={signUp}></Route>
                 <Route path="/userPage" component={userPage}></Route>
-                <Route path="/adminPage" component={adminPage}></Route>       
+                <Route path="/adminPage" component={adminPage}></Route> 
+                <Route path="/service/:id" component={servicePage}></Route>       
             </div>
             </BrowserRouter>
         )
