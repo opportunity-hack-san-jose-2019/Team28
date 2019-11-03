@@ -6,25 +6,40 @@ import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {ROOT_URL} from '../../URLSettings';
 
-const Checkbox = props => (
-  <input type="checkbox" {...props} />
-)
 
-export default class signUp extends Component {
+export default class AdminPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
       name : "",
-      userType :""
+     about : "",
+      city : "",
+      country : "",
+     company : "", 
+     school : "",
+      hometown : "",
+       languages : "",
+        gender : "",
+        userType :"",
+
+
+
+        serviceName: "",
+        location: "",
+        description : "",
+        url : "",
+        category : "",
+
+
     };
   }
 
   //Profile Image, Name, Email, Phone Number, About Me,City, Country, Company, School, Hometown, Languages, Gender
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0 && this.state.name.length >0;
+    return this.state.serviceName.length > 0 && this.state.description.length > 0 && this.state.location.length >0 && this.state.category.length > 0 && this.state.url.length > 0
   }
 
   componentWillMount(){
@@ -60,18 +75,22 @@ export default class signUp extends Component {
   
 
   signUpStudent = event => {
+    console.log("Clicked Create Service")
     event.preventDefault();
     var data = {
-      email: this.state.email,
-      password: this.state.password,
-      usernname : this.state.name,
-      role : this.state.userType
+      Name: this.state.serviceName,
+      Location: this.state.location,
+      Description : this.state.description,
+      URL : this.state.url,
+      Category : this.state.category,
+
     }
     console.log(data);
 
     axios.defaults.withCredentials = true;
-    axios.post(`${ROOT_URL}/users/signup`, data)
+    axios.post(`${ROOT_URL}/addService`, data)
     .then(res => {
+      console.log("In Admin Page")  
       this.props.history.push('/');
     });
   
@@ -85,52 +104,64 @@ export default class signUp extends Component {
       
       <div className="Login">
      <div>
-       <h2 align = "center">Sign Up now!!</h2>
+       <h2 align = "center">Add a Service</h2>
      </div>
         <form  align= "center">
         
           
-          <Form.Group controlId="email" >
-            <Form.Label>Email</Form.Label>
+          <Form.Group controlId="serviceName" >
+            <Form.Label>Service Name</Form.Label>
             <Form.Control
               autoFocus
-              type="email"
-              value={this.state.email}
+              type="serviceName"
+              value={this.state.serviceName}
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="password" >
-            <Form.Label>Password</Form.Label>
+          <Form.Group controlId="location" >
+            <Form.Label>Location</Form.Label>
             <Form.Control
-              value={this.state.password}
+              value={this.state.location}
               onChange={this.handleChange}
-              type="password"
+              type="location"
             />
           </Form.Group>
-          <Form.Group controlId="name" >
-            <Form.Label>Name</Form.Label>
+          <Form.Group controlId="description" >
+            <Form.Label>Description</Form.Label>
             <Form.Control
-              value={this.state.name}
+              value={this.state.description}
+              onChange={this.handleChange}
+              type="text"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="url" >
+            <Form.Label>URL</Form.Label>
+            <Form.Control
+              value={this.state.url}
+              onChange={this.handleChange}
+              type="text"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="category" >
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              value={this.state.category}
               onChange={this.handleChange}
               type="text"
             />
           </Form.Group>
           <fieldset>
-      <div onChange={this.setUserType.bind(this)}>
-      I am a &nbsp;
-        <input type="radio" value="student" name="gender"/> User &nbsp;
-        <input type="radio" value="faculty" name="gender"/> Admin
-      </div>
+  
       </fieldset>
 
           <Button
             block
-            
            disabled={!this.validateForm()}
             type="button"  onClick = {this.signUpStudent}
           >
-
-           Create an account 
+           Create a new service
           </Button>
 
           
