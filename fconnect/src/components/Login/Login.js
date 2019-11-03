@@ -8,7 +8,10 @@ import './Login.css';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import Background from '../../images/Background.jpg';
+<<<<<<< HEAD
 import {ROOT_URL} from '../../URLSettings';
+=======
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
 
 
 export default class Login extends Component {
@@ -40,23 +43,36 @@ export default class Login extends Component {
   }
 
 
+<<<<<<< HEAD
   signInStudent = event => {
+=======
+  signInFaculty = event => {
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
     event.preventDefault();
 
     //Creating data to be sent
     var data = {
       password : this.state.password,
+<<<<<<< HEAD
       email : this.state.name
     }
 
     axios.defaults.withCredentials = true;
     axios.post(`${ROOT_URL}/users/login`, JSON.stringify(data))
+=======
+      name : this.state.name
+    }
+
+    axios.defaults.withCredentials = true;
+    axios.post('http://localhost:9000/FacultySignIn', JSON.stringify(data))
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
     .then(res => {
       var resultData = res.data[0];
 
       console.log("Inside Login" + resultData);
       if(res.data[0]){
         console.log("Correct Login");
+<<<<<<< HEAD
       //localStorage.setItem('token', resultData.x);
       localStorage.setItem('name' , resultData.email);
       localStorage.setItem('userType' , resultData.role);
@@ -64,6 +80,15 @@ export default class Login extends Component {
         authFlag : true
     }) 
     this.props.history.push('/userPage') }  else {
+=======
+      localStorage.setItem('token', resultData.x);
+      localStorage.setItem('name' , resultData.name);
+      localStorage.setItem('userType' , resultData.userType);
+      this.setState({
+        authFlag : true
+    }) 
+    this.props.history.push('/home/courses') }  else {
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
       if(res.status === 200){
         console.log("Invaid Login");
         this.setState({
@@ -80,7 +105,11 @@ export default class Login extends Component {
   
   }
 
+<<<<<<< HEAD
   /*signInStudent = event => {
+=======
+  signInStudent = event => {
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
     event.preventDefault();
 
     //Creating data to be sent
@@ -90,7 +119,11 @@ export default class Login extends Component {
     }
 
     axios.defaults.withCredentials = true;
+<<<<<<< HEAD
     axios.post('http://localhost:3001/users/login', JSON.stringify(data))
+=======
+    axios.post('http://localhost:9000/StudentSignIn', JSON.stringify(data))
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
     .then(res => {
       var resultData = res.data[0];
 
@@ -118,7 +151,11 @@ export default class Login extends Component {
      
     });
   
+<<<<<<< HEAD
   } */
+=======
+  }
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
 
 
   render(){
@@ -130,6 +167,7 @@ export default class Login extends Component {
       <div className="Login">
      
      <div>
+<<<<<<< HEAD
        <h2> Welcome to F-Connect </h2>
       </div>
         <form  align= "center" style={{marginTop : 300}}>
@@ -137,6 +175,15 @@ export default class Login extends Component {
             <Form.Control
               value={this.state.name}
               placeholder = "Email"
+=======
+    
+      </div>
+        <form  align= "center" style={{marginTop : "100"}}>
+        <Form.Group controlId="name" >
+            <Form.Control
+              value={this.state.name}
+              placeholder = "Name"
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
               onChange={this.handleChange}
               type="text"
             />
@@ -158,9 +205,23 @@ export default class Login extends Component {
             onClick = {this.signInStudent}
             type="button"
           >
+<<<<<<< HEAD
             Sign In 
           </Button>
          
+=======
+            Sign In As User
+          </Button>
+          <Button
+            block
+            
+            //disabled={!this.validateForm()}
+            onClick = {this.signInFaculty}
+            type="button"
+          >
+            Sign In As Admin
+          </Button>
+>>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
           Not a Member?  <Link to="/signup">Signup</Link>
           <p>  {this.state.errorMessage}</p>
         </form>
