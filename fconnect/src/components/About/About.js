@@ -21,6 +21,17 @@ class About extends Component {
                 world among the stalks, and grow familiar with the countless
                 indescribable.
               </p>{" "}
+              <h2 className="text-primary display-6">
+                <b> Why its all started!</b>
+              </h2>
+              <iframe
+                width="650"
+                height="372"
+                src="https://www.youtube.com/embed/lAyljashF2A/?controls=1"
+              ></iframe>
+              <h2 className="text-primary display-6">
+                <b> What and How are we gonna do!</b>
+              </h2>
               <iframe
                 width="650"
                 height="372"
