@@ -32,7 +32,7 @@ router.post('/addService',function(req,res){
 
 })
 
-router.post('/getService/:id',function(req,res){
+router.get('/getService/:id',function(req,res){
   
   console.log("Inside getMyServices" + "with req" + req.params);
   FederalService.find({ _id : req.params.id},
@@ -65,6 +65,85 @@ router.post('/deleteService',function(req,res){
            res.end("DOne");
        }
    });
+
+})
+
+
+router.post('/updateService',function(req,res){
+  console.log("Updating nehcnwdc");
+  console.log(req.body);
+
+
+  FederalService.findOne({
+     "_id" : req.body.serviceId 
+}, (err, user) => {
+
+    if (err) {
+        console.log("Unable to fetch user details.", err);
+        callback(err, null);
+    }
+    else {
+        console.log('UserProfile', user);
+
+        user.Name= req.body.Name,
+    user.Location= req.body.Location,
+    user.Description= req.body.Description,
+    user.URL= req.body.URL,
+    user.Category= req.body.Category,
+    user.Email= req.body.Email
+
+       /* user.name = message.name;
+        user.email = message.email;
+        user.phoneNumber = message.phoneNumber;
+        user.about = message.about;
+        user.city = message.city;
+        user.country = message.country;
+        user.company = message.company; 
+        user.school = message.school;
+        user.hometown = message.hometown;
+        user.languages = message.languages;
+        user.gender = message.gender; */
+        
+        user.save().then((doc) => {
+
+            console.log("User details Updated successfully.", doc);
+            res.end(doc);
+
+        }, (err) => {
+            console.log("Unable to save user details.", err);
+            res.end("Error");
+           
+        });
+    }
+});
+
+
+
+  FederalService.findOneAndUpdate(
+    { "_id" : req.body.serviceId },
+    { Name: req.body.Name,
+    Location: req.body.Location,
+    Description: req.body.Description,
+    URL: req.body.URL,
+    Category: req.body.Category,
+    Email: req.body.Email }
+ )
+
+/*  FederalService.update({
+    "_id" : req.body.serviceName }
+      , function (err, course) {
+       if (err) {
+           console.log("Error", err);
+           res.writeHead(400, {
+               'Content-type': 'text/plain'
+           });
+           res.end('Error - Course');
+       }
+       else {
+           //console.log(course);
+           res.end("DOne");
+       }
+   }); */
 
 })
 

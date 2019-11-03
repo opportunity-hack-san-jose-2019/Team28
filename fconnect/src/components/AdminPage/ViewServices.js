@@ -58,7 +58,7 @@ deleteItem(e)
                     <h2 class="cardName">{data.Name}</h2>
                     <h6 class="card-subtitle mb-2 text-muted cardName" style= {{height : 50}}> <p> {data.Description} </p> </h6>
                     <p class="card-text cardName"> <a href={data.URL}> {data.URL} </a> </p>
-                    {this.state.userType === "mentor" ?  <div> <Link to={`/serviceDetails/${data.Name}`}> Edit Service </Link> <button id={data._id} onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
+                    {this.state.userType === "mentor" ?  <div> <Link to={`/serviceDetails/${data._id}`}> Edit Service </Link> <button id={data._id} onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
               Delete
 </button> </div>  : "" } 
                    
