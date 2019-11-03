@@ -17,10 +17,7 @@
     "react-bootstrap-table": "^4.3.1",
     "react-cookies": "^0.1.0",
     "react-dom": "^16.8.3",
-<<<<<<< HEAD
     "react-draggable": "^4.1.0",
-=======
->>>>>>> ff5538fefa5e15e1262869dd7e190f464137e1d4
     "react-filepond": "^7.0.1",
     "react-native": "^0.59.1",
     "react-pdf": "^4.0.5",

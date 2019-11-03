@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import cookie from 'react-cookies';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import ROOT_URL from '../../URLSettings';
 
 const Checkbox = props => (
   <input type="checkbox" {...props} />
