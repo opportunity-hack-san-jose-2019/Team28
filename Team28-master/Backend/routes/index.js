@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/addService',function(req,res){
+  
   var Service = new FederalService({
     Name : req.body.Name,
     Location : req.body.Location,
@@ -18,6 +19,7 @@ router.post('/addService',function(req,res){
     Category : req.body.Category
   })
 
+  console.log("Service Object"+Service.Name)
   Service.save().then((doc) => {
     console.log("Service added successfully.", doc);
     res.send(doc);
