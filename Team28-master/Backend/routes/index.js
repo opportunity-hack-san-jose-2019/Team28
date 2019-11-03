@@ -31,6 +31,48 @@ router.post('/addService',function(req,res){
 
 })
 
+router.post('/getService',function(req,res){
+  
+  var Service = new FederalService({
+    Name : req.body.Name,
+    Location : req.body.Location,
+    Description : req.body.Description,
+    URL : req.body.URL,
+    Category : req.body.Category
+  })
+
+  console.log("Service Object"+Service.Name)
+  Service.save().then((doc) => {
+    console.log("Service added successfully.", doc);
+    res.send(doc);
+  }, (err) => {
+    console.log("Unable to add service.", err);
+    res.send(err);
+   
+  }); 
+
+})
+
+router.post('/deleteService',function(req,res){
+  
+  FederalService.remove({
+    "_id" : req.body.id }
+      , function (err, course) {
+       if (err) {
+           console.log("Error", err);
+           res.writeHead(400, {
+               'Content-type': 'text/plain'
+           });
+           res.end('Error - Course');
+       }
+       else {
+           console.log(course);
+           res.end(course);
+       }
+   });
+
+})
+
 router.get('/services',function(req,res){
 
   

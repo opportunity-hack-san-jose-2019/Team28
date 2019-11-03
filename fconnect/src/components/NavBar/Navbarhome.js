@@ -3,7 +3,6 @@ import './Navbarhome.css';
 import cookie from "react-cookies";
 import Link from "react-router-dom/es/Link";
 import logo from "../../images/connect.png"
-import flag from "../../images/american-flag-vector-icon.jpg";
 
 
     class Navbarhome extends Component {
@@ -16,11 +15,13 @@ import flag from "../../images/american-flag-vector-icon.jpg";
 
     logout = (e) =>
     {
-        cookie.remove('cookie', { path: '/' });
-        cookie.remove('userid', { path: '/' });
+        localStorage.removeItem("name");
+        localStorage.removeItem("userType");
     }
 
     render() {
+
+        let loggedIn = (localStorage.getItem("name") === null);
 
         return (
             <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top">
@@ -43,28 +44,29 @@ import flag from "../../images/american-flag-vector-icon.jpg";
                             <a className="nav-link"><Link to={"/login" }> Login <span className="sr-only">current</span></Link></a>
                         </li>
 
-                        {(cookie.load('cookie') === 'owner') &&
-                        (<div>
+                        {{loggedIn} &&
+                        (
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                     States
                                 </a>
                                 <div className="dropdown-menu">
-                                    <a className="dropdown-item" href="#">Link 1</a>
-                                    <a className="dropdown-item" href="#">Link 2</a>
-                                    <a className="dropdown-item" href="#">Link 3</a>
+                                    <a className="dropdown-item" href="/services/ca">California</a>
+                                    <a className="dropdown-item" href="/services/wa">Washington</a>
+                                    <a className="dropdown-item" href="/services/or">Orlando</a>
                                 </div>
                             </li>
-                             <li className="nav-item dropdown">
+                        )}
+                        {{loggedIn} &&  (
+                            <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {cookie.load('username')}
+                                    Dharma
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" ><Link to={"/profile/" + cookie.load('userid') }>Profile</Link></a>
                                     <a className="dropdown-item" ><Link to="/" onClick={this.logout}>Logout</Link></a>
                                 </div>
                             </li>
-                        </div>)
+                        )
                         }
                     </ul>
                 </div>

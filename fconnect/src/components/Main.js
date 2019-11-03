@@ -9,6 +9,7 @@ import Navbarhome from "./NavBar/Navbarhome";
 import userPage from './UserPage/UserPage';
 import adminPage from './AdminPage/AdminPage';
 import servicePage from './ServicePage/ServicePage';
+import editservicePage from './ServicePage/EditService';
 
 
 
@@ -26,6 +27,8 @@ class Main extends Component {
                 <Route path="/userPage" component={userPage}></Route>
                 <Route path="/adminPage" component={adminPage}></Route> 
                 <Route path="/service/:id" component={servicePage}></Route>
+                <Route path="/serviceDetails/:id" component={editservicePage}></Route>
+                <Route path="/serviceDelete/:id" component={servicePage}></Route>
             </div>
             </BrowserRouter>
         )
