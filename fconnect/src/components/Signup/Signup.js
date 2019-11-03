@@ -64,7 +64,7 @@ export default class signUp extends Component {
     var data = {
       email: this.state.email,
       password: this.state.password,
-      usernname : this.state.name,
+      username : this.state.name,
       role : this.state.userType
     }
     console.log(data);

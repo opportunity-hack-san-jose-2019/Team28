@@ -4,6 +4,8 @@ import {BrowserRouter} from 'react-router-dom';
 import LoginPage from './Login/Login';
 import signUp from './Signup/Signup';
 import landingPage from './LandingPage/LandingPage';
+import Navbarhome from "./NavBar/Navbarhome";
+
 import userPage from './UserPage/UserPage';
 import adminPage from './AdminPage/AdminPage';
 import servicePage from './ServicePage/ServicePage';
@@ -17,6 +19,10 @@ class Main extends Component {
             <BrowserRouter>
             <div>
                 {/*Render Different Component based on Route*/}
+                <Route path="/" component={Navbarhome} />
+                <Route exact path="/login"   component={LoginPage}/>
+                <Route exact path="/"   component={landingPage}/>
+                <Route exact path="/signUp" component={signUp}></Route>
                 <Route path="/login"  exact component={LoginPage}/>
                 <Route path="/"  exact component={landingPage}/>
                 <Route path="/signUp" component={signUp}></Route>

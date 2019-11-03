@@ -8,6 +8,8 @@ import './Login.css';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import Background from '../../images/Background.jpg';
+import Navbarhome from "../NavBar/Navbarhome";
+
 //import ROOT_URL from '../../URLSettings';
 import {ROOT_URL} from '../../URLSettings';
 
@@ -89,14 +91,13 @@ export default class Login extends Component {
    
     return (
       <div className = "Fullpage">
-      <div className = "LoginPage" align = "center" >
-      { /* {redirectVar} */ }
+      <div className ="LoginPage" align = "center" >
       <div className="Login">
-     
      <div>
        <h2> Welcome to F-Connect </h2>
       </div>
         <form  align= "center" style={{marginTop : 300}}>
+
         <Form.Group controlId="name" >
             <Form.Control
               value={this.state.name}
