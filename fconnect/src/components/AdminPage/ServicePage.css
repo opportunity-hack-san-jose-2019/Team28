@@ -1,0 +1,14 @@
+.ServicePage {
+    margin-top: 120px;
+    min-height: 700px;
+}
+
+.card {
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+}
+
+.cardName{
+    margin-left: 600px;
+}

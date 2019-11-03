@@ -9,6 +9,7 @@ import logo from "../../images/connect.png"
 
     constructor(props)
     {
+        
         super(props);
         this.logout = this.logout.bind(this);
     }
@@ -22,7 +23,8 @@ import logo from "../../images/connect.png"
     render() {
 
         let loggedIn = (localStorage.getItem("name") === null);
-
+        let isAdmin = (localStorage.getItem("userType") === "mentor");
+        let user =   localStorage.getItem("name");
         return (
             <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top">
 
@@ -34,6 +36,14 @@ import logo from "../../images/connect.png"
                         <li className="nav-item btn-link">
                             <a className="nav-link"><Link to={"/contact" }> Contact Us <span className="sr-only">current</span></Link></a>
                         </li>
+                        { isAdmin ? <li className="nav-item btn-link">
+                            <a className="nav-link"> <Link to={"/addService" }> Add Service <span className="sr-only">current</span></Link></a>
+        </li> 
+        : ""}
+          { isAdmin ? <li className="nav-item btn-link">
+                            <a className="nav-link"> <Link to={"/viewServices" }> My Services <span className="sr-only">current</span></Link></a>
+        </li> 
+        : ""}
                         <li className="nav-item btn-link">
                             <a className="nav-link"><Link to={"/about" }> About Us <span className="sr-only">current</span></Link></a>
                         </li>
@@ -57,16 +67,16 @@ import logo from "../../images/connect.png"
                                 </div>
                             </li>
                         )}
-                        {{loggedIn} &&  (
+                        {!loggedIn ? (
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dharma
+                                  {localStorage.getItem("userName")}
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a className="dropdown-item" ><Link to="/" onClick={this.logout}>Logout</Link></a>
                                 </div>
                             </li>
-                        )
+                        ) : ""
                         }
                     </ul>
                 </div>

@@ -10,9 +10,12 @@ import {ROOT_URL} from '../../URLSettings';
 
 export default class EditService extends Component {
   constructor(props) {
+    
+      
     super(props);
+    console.log(this.props.match.params.id);
     this.state = {
-      email: "",
+      email: localStorage.getItem("name"),
       password: "",
       name : "",
      about : "",
@@ -50,9 +53,18 @@ export default class EditService extends Component {
   }
  
   componentDidMount(){
-    axios.get(`${ROOT_URL}/categories`)
+    axios.get(`${ROOT_URL}/getService/${this.props.match.params.id}`)
     .then(res => {
-        this.setState({categories : res.data})
+        console.log("Rekhdn,emnf" + res.data.Name + res.data[0].name)
+        this.setState({
+            serviceName: res.data.Name,
+            location: res.data.Location,
+            description : res.data.Description,
+            url : res.data.URL,
+            category : res.data.Category,
+
+
+            categories : res.data})
     })
   }
 
@@ -95,7 +107,7 @@ export default class EditService extends Component {
     }
     console.log(data);
 
-    axios.defaults.withCredentials = true;
+    
     axios.post(`${ROOT_URL}/addService`, data)
     .then(res => {
       console.log("In Admin Page")  

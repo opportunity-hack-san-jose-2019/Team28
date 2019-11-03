@@ -12,7 +12,7 @@ export default class AdminPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: localStorage.getItem("name"),
       password: "",
       name : "",
      about : "",
@@ -90,6 +90,7 @@ export default class AdminPage extends Component {
       Location: this.state.location,
       Description : this.state.description,
       URL : this.state.url,
+      email : this.state.email,
       Category : this.state.category,
 
     }
@@ -165,6 +166,7 @@ export default class AdminPage extends Component {
           <Form.Group controlId="category" >
             <Form.Label>Category</Form.Label>
             <Form.Control as="select" onChange={this.handleChange}>
+            <option> Select a Category</option>
                 {options} 
                 
             </Form.Control>
@@ -177,7 +179,7 @@ export default class AdminPage extends Component {
 
           <Button
             block
-           disabled={!this.validateForm()}
+           disabled={!this.validateForm()} 
             type="button"  onClick = {this.signUpStudent}
           >
            Create a new service
