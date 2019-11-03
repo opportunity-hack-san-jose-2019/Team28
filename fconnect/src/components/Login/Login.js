@@ -107,8 +107,9 @@ export default class Login extends Component {
 
                           console.log("Correct Login");
                           //localStorage.setItem('token', resultData.x);
-                          localStorage.setItem('name', res.email);
-                          localStorage.setItem('userType', 'user');
+                          localStorage.setItem('name' , res.data.email);
+                          localStorage.setItem('userType' , "user");
+                          localStorage.setItem('userName' , res.data.username);
                           this.setState({
                               authFlag: true
                           })
