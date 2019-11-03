@@ -6,7 +6,6 @@ import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 
 const Checkbox = props => (
- 
   <input type="checkbox" {...props} />
 )
 
@@ -17,15 +16,7 @@ export default class signUp extends Component {
       email: "",
       password: "",
       name : "",
-     about : "",
-      city : "",
-      country : "",
-     company : "", 
-     school : "",
-      hometown : "",
-       languages : "",
-        gender : "",
-        userType :""
+      userType :""
     };
   }
 
@@ -72,21 +63,13 @@ export default class signUp extends Component {
     var data = {
       email: this.state.email,
       password: this.state.password,
-      name : this.state.name,
-     about : this.state.about,
-      city : this.state.city,
-      country : this.state.country,
-     company : this.state.company, 
-     school : this.state.school,
-      hometown : this.state.hometown,
-       languages : this.state.languages,
-        gender : this.state.gender,
-        userType : this.state.userType
+      usernname : this.state.name,
+      role : this.state.userType
     }
     console.log(data);
 
     axios.defaults.withCredentials = true;
-    axios.post('http://localhost:9000/signUp', data)
+    axios.post(`${ROOT_URL}/users/signup`, data)
     .then(res => {
       this.props.history.push('/');
     });

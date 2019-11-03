@@ -34,13 +34,7 @@ export default class LandingPage extends Component {
 </ul>
 </div>
 
-     { /*  <a style={{    marginLeft: "700px"
-}}class="nav-link active" href="/login"> <h3> CONTACT US </h3></a>
-       <a style={{    marginLeft: "9000px"
-}}class="nav-link active" href="/login"> <h3> ABOUT US </h3></a>
-        <a style={{    marginLeft: "1100px"
-}}class="nav-link active" href="/login"> <h3> LOGIN </h3></a>
-</div> */}
+     
       <Carousel showThumbs={false} infiniteLoop={true}>
         <div style={{ height: "700px", color: "#fff" }}>this is slide 1</div>
         <div style={{ height: "700px", color: "#fff" }}>this is slide 2</div>
