@@ -4,13 +4,11 @@ const Schema = mongoose.Schema;
 var FederalSchema = new Schema({
   Name: {
     type: String,
-    unique: true,
     required: true,
     trim: true
   },
   Location: {
     type: String,
-    unique: true,
     required: true,
     trim: true
   },
