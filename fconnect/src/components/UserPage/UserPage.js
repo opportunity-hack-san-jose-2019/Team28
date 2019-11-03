@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-//import '../../App.css';
+import './UserPage.css';
 import {Redirect} from 'react-router';
 import { Link } from 'react-router-dom';
 import Draggable from 'react-draggable';
@@ -44,13 +44,14 @@ export default class HomeCourses extends Component {
    
     render(){
        return (
+           <div class="category">
            <div class = "row">
            <div class = "col-sm-3">
         <div class="card" id="Housing Services" onClick= {this.openService} style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
    <div class="card-body" id="Housing Services"  onClick= {this.openService} style = {{backgroundColor : randomColor(), height : 130}}>
    <i class="fas fa-home"></i>
   </div>
-  <h6 class="card-subtitle mb-2 text-muted" style= {{height : 50}}>Housing Services</h6>
+  <h4 class="card-subtitle md-2 py-3 text-muted" style= {{height : 50}}> <b>Housing Services </b></h4>
     <p class="card-text"> </p>
   
    
@@ -108,6 +109,7 @@ export default class HomeCourses extends Component {
    
     </div>
     </div>
+ </div>
  </div>
        );
 }

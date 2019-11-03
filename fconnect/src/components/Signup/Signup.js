@@ -12,6 +12,7 @@ const Checkbox = props => (
 )
 
 export default class signUp extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {

@@ -1,0 +1,10 @@
+.category {
+    min-height: 700px;
+    margin-top: 80px;
+    /*background: url("../../images/bg3.png") center center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+    background: linear-gradient(grey,#add8e6)
+   
+
+}
