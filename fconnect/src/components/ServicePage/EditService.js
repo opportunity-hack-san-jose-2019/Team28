@@ -29,8 +29,8 @@ export default class EditService extends Component {
         userType :"",
         categories : [],
 
-
-        serviceName: this.props.match.params.id,
+        serviceId: this.props.match.params.id,
+        serviceName: "",
         location: "",
         description : "",
         url : "",
@@ -55,16 +55,16 @@ export default class EditService extends Component {
   componentDidMount(){
     axios.get(`${ROOT_URL}/getService/${this.props.match.params.id}`)
     .then(res => {
-        console.log("Rekhdn,emnf" + res.data.Name + res.data[0].name)
+        console.log("Rekhdn,emnf" +  res.data[0].Name)
         this.setState({
-            serviceName: res.data.Name,
-            location: res.data.Location,
-            description : res.data.Description,
-            url : res.data.URL,
-            category : res.data.Category,
-
-
+            serviceName: res.data[0].Name,
+            location: res.data[0].Location,
+            description : res.data[0].Description,
+            url : res.data[0].URL,
+            category : res.data[0].Category,
+            serviceId : res.data[0]._id,
             categories : res.data})
+            
     })
   }
 
@@ -95,7 +95,7 @@ export default class EditService extends Component {
   
 
   signUpStudent = event => {
-    console.log("Clicked Create Service")
+    console.log("Clicked Edit Service")
     event.preventDefault();
     var data = {
       Name: this.state.serviceName,
@@ -103,15 +103,17 @@ export default class EditService extends Component {
       Description : this.state.description,
       URL : this.state.url,
       Category : this.state.category,
+      Email : this.state.email,
+      serviceId : this.state.serviceId
 
     }
-    console.log(data);
+    console.log(data + "Modified Service Data");
 
     
-    axios.post(`${ROOT_URL}/addService`, data)
+    axios.post(`${ROOT_URL}/updateService`, data)
     .then(res => {
       console.log("In Admin Page")  
-      this.props.history.push('/');
+      this.props.history.push('/viewServices');
     });
   
   }
@@ -120,9 +122,7 @@ export default class EditService extends Component {
 
   render(){
 
-    const options = this.state.categories.map(item => {
-        return <option> {item.name} </option>
-    })
+    
 
    
     return (
@@ -173,15 +173,6 @@ export default class EditService extends Component {
               type="text"
             />
           </Form.Group>
-
-          <Form.Group controlId="category" >
-            <Form.Label>Category</Form.Label>
-            <Form.Control as="select" onChange={this.handleChange}>
-                {options} 
-                
-            </Form.Control>
-           
-          </Form.Group>
          
         <fieldset>
   
@@ -192,7 +183,7 @@ export default class EditService extends Component {
            disabled={!this.validateForm()}
             type="button"  onClick = {this.signUpStudent}
           >
-           Create a new service
+           Edit an existing service
           </Button>
 
           
