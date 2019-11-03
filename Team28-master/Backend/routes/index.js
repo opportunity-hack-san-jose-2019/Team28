@@ -16,7 +16,8 @@ router.post('/addService',function(req,res){
     Location : req.body.Location,
     Description : req.body.Description,
     URL : req.body.URL,
-    Category : req.body.Category
+    Category : req.body.Category,
+    Email : req.body.email
   })
 
   console.log("Service Object"+Service.Name)
@@ -31,31 +32,25 @@ router.post('/addService',function(req,res){
 
 })
 
-router.post('/getService',function(req,res){
+router.get('/getService/:id',function(req,res){
   
-  var Service = new FederalService({
-    Name : req.body.Name,
-    Location : req.body.Location,
-    Description : req.body.Description,
-    URL : req.body.URL,
-    Category : req.body.Category
-  })
-
-  console.log("Service Object"+Service.Name)
-  Service.save().then((doc) => {
-    console.log("Service added successfully.", doc);
-    res.send(doc);
-  }, (err) => {
-    console.log("Unable to add service.", err);
-    res.send(err);
-   
-  }); 
+  console.log("Inside getMyServices" + "with req" + req.params);
+  FederalService.find({ _id : req.params.id},
+   function(err,service){
+     if(err)
+       res.send(err)
+     else
+       res.send(service)
+   });
 
 })
+
+
 
 router.post('/deleteService',function(req,res){
-  
-  FederalService.remove({
+  console.log("Deleting nehcnwdc");
+  console.log(req.body.id);
+  FederalService.deleteOne({
     "_id" : req.body.id }
       , function (err, course) {
        if (err) {
@@ -66,10 +61,56 @@ router.post('/deleteService',function(req,res){
            res.end('Error - Course');
        }
        else {
-           console.log(course);
-           res.end(course);
+           //console.log(course);
+           res.end("DOne");
        }
    });
+
+})
+
+
+router.post('/updateService',function(req,res){
+  console.log("Updating nehcnwdc");
+  console.log(req.body);
+
+
+  FederalService.findOne({
+     "_id" : req.body.serviceId 
+}, (err, user) => {
+
+    if (err) {
+        console.log("Unable to fetch user details.", err);
+        callback(err, null);
+    }
+    else {
+        console.log('UserProfile', user);
+
+        user.Name= req.body.Name,
+    user.Location= req.body.Location,
+    user.Description= req.body.Description,
+    user.URL= req.body.URL,
+    user.Category= req.body.Category,
+    user.Email= req.body.Email
+
+       
+        user.save().then((doc) => {
+
+            console.log("User details Updated successfully.", doc);
+            res.end("Successful");
+            //res.end(doc);
+
+        }, (err) => {
+            console.log("Unable to save user details.", err);
+            res.end("Error");
+           
+        });
+    }
+});
+
+
+
+
+
 
 })
 
@@ -87,6 +128,21 @@ router.get('/services',function(req,res){
  
 })
 
+router.get('/getMyservices/:id',function(req,res){
+
+  console.log("Inside getMyServices" + "with req" + req.params);
+  FederalService.find({ Email : req.params.id},
+   function(err,service){
+     if(err)
+       res.send(err)
+     else
+       res.send(service)
+   });
+  
+  
+ })
+
+
 router.get('/categories',function(req,res){
   CategoryServices.find({},
     function(err,service){
@@ -99,7 +155,7 @@ router.get('/categories',function(req,res){
 
 router.post('/addCategory',function(req,res){
   var newCategory = new CategoryServices({
-    Name : req.body.Name
+    name : req.body.name
   })
  
   newCategory.save().then((doc) => {

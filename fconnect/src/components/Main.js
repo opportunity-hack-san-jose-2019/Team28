@@ -10,6 +10,8 @@ import userPage from './UserPage/UserPage';
 import adminPage from './AdminPage/AdminPage';
 import servicePage from './ServicePage/ServicePage';
 import editservicePage from './ServicePage/EditService';
+import viewMyServices from './AdminPage/ViewServices';
+import CategoryPage from './CategoryPage/CategoryPage'
 
 
 
@@ -25,11 +27,14 @@ class Main extends Component {
                 <Route path="/"  exact component={landingPage}/>
                 <Route path="/signUp" component={signUp}></Route>
                 <Route path="/userPage" component={userPage}></Route>
-                <Route path="/adminPage" component={adminPage}></Route> 
+                <Route path="/addService" component={adminPage}></Route> 
                 <Route path="/service/:id" component={servicePage}></Route>
                 <Route path="/serviceDetails/:id" component={editservicePage}></Route>
                 <Route path="/serviceDelete/:id" component={servicePage}></Route>
+
                 <Route path="/stateServices/:id" component={servicePage}></Route>
+                <Route path="/viewServices" component={viewMyServices}></Route>
+                <Route path="/newCategory" component={CategoryPage}></Route>
 
             </div>
             </BrowserRouter>

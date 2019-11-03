@@ -7,7 +7,7 @@ import {Redirect} from 'react-router';
 import './ServicePage.css'
 import Button from 'react-bootstrap/Button';
 
- export default class ServicePage extends Component {
+ export default class ViewServices extends Component {
   constructor(props) {
     super(props);
     console.log(this.props.match.params.id);
@@ -23,8 +23,8 @@ import Button from 'react-bootstrap/Button';
 
   componentDidMount(){
     console.log("Mounting");
-    console.log(this.state.courseId);
-    axios.get(`${ROOT_URL}/services/categories/${this.state.courseId}`)
+    console.log(this.state.name);
+    axios.get(`${ROOT_URL}/getMyservices/${this.state.name}`)
     .then((response)=>{
     console.log(response);
         this.setState({
@@ -51,8 +51,8 @@ deleteItem(e)
   render() {
       var services = this.state.services.map( data => {
         return (  
-        <div> 
-                    <div key= {data.URL} class="card" >
+        <div key={data.Name}> 
+                    <div class="card" >
                         {/* <div class="card-body" style = {{ height : 130}}>
                     </div> */}
                     <h2 class="cardName">{data.Name}</h2>

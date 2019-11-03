@@ -58,6 +58,7 @@ export default class Login extends Component {
       //localStorage.setItem('token', resultData.x);
       localStorage.setItem('name' , res.data.email);
       localStorage.setItem('userType' , res.data.role);
+      localStorage.setItem('userName' , res.data.username);
       this.setState({
         authFlag : true
     }) 
