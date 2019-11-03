@@ -4,13 +4,8 @@ import Button from 'react-bootstrap/Button';
 import cookie from 'react-cookies';
 import { Link } from 'react-router-dom';
 import './Login.css';
-//import Bootstrap from "react-bootstrap";
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
-import Background from '../../images/Background.jpg';
-import Navbarhome from "../NavBar/Navbarhome";
-
-//import ROOT_URL from '../../URLSettings';
+import GoogleLogin from "react-google-login";
 import {ROOT_URL} from '../../URLSettings';
 
 
@@ -65,7 +60,9 @@ export default class Login extends Component {
       this.setState({
         authFlag : true
     }) 
-    this.props.history.push('/userPage') }  else {
+    this.props.history.push('/userPage')
+    }
+    else {
      
         console.log("Invaid Login");
         this.setState({
@@ -76,8 +73,6 @@ export default class Login extends Component {
             name : "",
         })
       }
-    
-     
     });
   
   }
@@ -87,7 +82,50 @@ export default class Login extends Component {
 
 
   render(){
-   
+
+      const responseGoogle = (response) => {
+          var data = {
+              email : response.profileObj.email,
+              username : response.profileObj.name
+          }
+          console.log(response.profileObj) ;
+          console.log('data:'+ data);
+
+          axios.defaults.withCredentials = true;
+          axios.post(`${ROOT_URL}/users/signupWithGoogle`, data)
+              .then(res => {
+                  console.log(res.status +  "Resulyt bkwsde");
+                  // var resultData = res.data[0];
+                  if(res.status === 200){
+
+                      console.log("Correct Login");
+                      //localStorage.setItem('token', resultData.x);
+                      localStorage.setItem('name' , res.email);
+                      localStorage.setItem('userType' , 'user');
+                      this.setState({
+                          authFlag : true
+                      })
+                      this.props.history.push('/userPage')
+                  }
+                  else {
+
+                      console.log("Invaid Login");
+                      this.setState({
+                          authFlag : false,
+                          errorMessage : "Invalid Login",
+
+                          password: "",
+                          name : "",
+                      })
+                  }
+            });
+      }
+
+      const failureGoogle = (response) => {
+          alert("Login using Google Failed. Please check console for more details.");
+          console.log(response);
+      }
+
     return (
       <div className = "Fullpage">
       <div className ="LoginPage" align = "center" >
@@ -95,7 +133,7 @@ export default class Login extends Component {
      <div>
        <h2> Welcome to F-Connect </h2>
       </div>
-        <form  align= "center" style={{marginTop : 300}}>
+        <form  align= "center">
 
         <Form.Group controlId="name" >
             <Form.Control
@@ -127,6 +165,16 @@ export default class Login extends Component {
          
           Not a Member?  <Link to="/signup">Signup</Link>
           <p>  {this.state.errorMessage}</p>
+
+          <br />
+          <br />
+
+            <GoogleLogin
+                clientId="309202928063-nqs6chp8a40e41dgmom5rh3dimg8akcd.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
+                buttonText="LOGIN WITH GOOGLE"
+                onSuccess={responseGoogle}
+                onFailure={failureGoogle}
+            />
         </form>
       </div>
       </div>
