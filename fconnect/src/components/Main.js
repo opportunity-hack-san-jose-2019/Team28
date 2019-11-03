@@ -8,6 +8,7 @@ import Navbarhome from "./NavBar/Navbarhome";
 
 import userPage from './UserPage/UserPage';
 import adminPage from './AdminPage/AdminPage';
+import servicePage from './ServicePage/ServicePage';
 
 
 
@@ -19,12 +20,12 @@ class Main extends Component {
             <div>
                 {/*Render Different Component based on Route*/}
                 <Route path="/" component={Navbarhome} />
-                <Route exact path="/login"   component={LoginPage}/>
-                <Route exact path="/"   component={landingPage}/>
-                <Route exact path="/signUp" component={signUp} />
-                <Route path="/userPage" component={userPage} />
-                <Route path="/adminPage" component={adminPage} />
-
+                <Route path="/login"  exact component={LoginPage}/>
+                <Route path="/"  exact component={landingPage}/>
+                <Route path="/signUp" component={signUp}></Route>
+                <Route path="/userPage" component={userPage}></Route>
+                <Route path="/adminPage" component={adminPage}></Route> 
+                <Route path="/service/:id" component={servicePage}></Route>
             </div>
             </BrowserRouter>
         )

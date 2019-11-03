@@ -19,87 +19,98 @@ export default class HomeCourses extends Component {
             courses : [],
             search :''
         }
-        this.searchCourses = this.searchCourses.bind(this);
+     //   this.searchCourses = this.searchCourses.bind(this);
     }  
 
     
    
     componentDidMount(){
-       /* console.log(this.props.loginStateStore);
-        var data = {
-            name : this.state.name,
-            userType : this.state.userType
-            }
-            this.props.getUserCourses(data,(response) => {
-                //update the state with the response data
-                this.setState({
-                    courses : response.data
-                });
-            } ) */
+
+      
      
     }
 
     searchCourseValue = event => {
-       /* console.log(event.target.value);
-        this.setState({
-            search : event.target.value
-        })
-       // this.props.history.push("/home/searchCourse"); */
+      
     }
 
-    searchCourses = event => {
-       /* console.log(event.target.value);
-        this.props.history.push("/home/searchCourse"); */
+    openService = event => {
+        console.log(event)
+        console.log(event.target.id)
+        this.props.history.push(`/service/${event.target.id}`);
+       
     }
 
    
     render(){
-        //if not logged in go to login page
-       
-        var redirectVar = null;
-        const isFaculty = (this.state.userType === 'faculty') ? true : false;
-
-      {/*  if(!localStorage.getItem('token')){
-            redirectVar = <Redirect to="/" />
-            return redirectVar;        
-    } */ }
-           
-            let courses = this.state.courses.map(course => {
-                return(
-                    
-                    
-                   
-                                  
- <div class="card" style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
-   <div class="card-body" style = {{backgroundColor : randomColor(), height : 130}}>
+       return (
+           <div class = "row">
+           <div class = "col-sm-3">
+        <div class="card" id="Housing Services" onClick= {this.openService} style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
+   <div class="card-body" id="Housing Services"  onClick= {this.openService} style = {{backgroundColor : randomColor(), height : 130}}>
+   <i class="fas fa-home"></i>
   </div>
-  <h6 class="card-subtitle mb-2 text-muted">{course.CourseId}</h6>
-    <p class="card-text">{course.CourseName}</p>
+  <h6 class="card-subtitle mb-2 text-muted" style= {{height : 50}}>Housing Services</h6>
+    <p class="card-text"> </p>
   
    
     </div>
-      )
-            })
-                return (
-                   <div>
-                         {isFaculty ? <a href="/home/AddCourse" class="btn btn-info" style = {{marginLeft : 200}}role="button">Create Course</a> : ''} 
-                  {!isFaculty ? <div class="form-group has-search">
-          
-             
-                  
-                  </div> : ''}
-                   
-                   <div>
-                    <div className = "col-sm-11" id = "courseSection" >  
-                 
-                      {courses}
-                    
-                    </div>
-                    </div>
-                    </div>
-                    
-                );
-    }
+    </div>
+    <div class = "col-sm-3">
+<div class="card" style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
+<div class="card-body" style = {{backgroundColor : randomColor(), height : 130}}>
+</div>
+<h6 class="card-subtitle mb-2 text-muted" style= {{height : 50}}>Medical Services</h6>
+ <p class="card-text"> </p>
+</div>
+ </div>
+
+ <div class = "col-sm-3">
+        <div class="card" style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
+   <div class="card-body" style = {{backgroundColor : randomColor(), height : 130}}>
+  </div>
+  <h6 class="card-subtitle mb-2 text-muted" style= {{height : 50}}>Financial Services</h6>
+    <p class="card-text"> </p>
+  
+   
+    </div>
+    </div>
+    <div class = "col-sm-3">
+        <div class="card" style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
+   <div class="card-body" style = {{backgroundColor : randomColor(), height : 130}}>
+  </div>
+  <h6 class="card-subtitle mb-2 text-muted" style= {{height : 50}}>College tuition Services</h6>
+    <p class="card-text"> </p>
+  
+   
+    </div>
+    </div>
+    <div class = "col-sm-3">
+        <div class="card" style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
+   <div class="card-body" style = {{backgroundColor : randomColor(), height : 130}}>
+  </div>
+  <h6 class="card-subtitle mb-2 text-muted " style= {{height : 50}}>Mentoring Services</h6>
+    <p class="card-text"> </p>
+  
+   
+    </div>
+    </div>
+    <div class = "col-sm-3">
+        <div class="card" style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
+   <div class="card-body" style = {{backgroundColor : randomColor(), height : 200}}>
+   <i class="fas fa-home"></i>
+
+
+  </div>
+  <h6 class="card-subtitle mb-2 text-muted" style= {{height : 50}}>Housing</h6>
+    <p class="card-text"> </p>
+  
+   
+    </div>
+    </div>
+ </div>
+       );
+}
 }
 
 
