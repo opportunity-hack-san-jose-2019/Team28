@@ -64,10 +64,10 @@ import {States} from "../../URLSettings";
                         </li>
                         : ""}
                         <li className="nav-item btn-link">
-                            <a className="nav-link"><Link to={"/about" }> About Us <span className="sr-only">current</span></Link></a>
+                            <a className="nav-link" href="/#about"> About Us <span className="sr-only">current</span></a>
                         </li>
                         <li className="nav-item btn-link">
-                            <a className="nav-link"><Link to={"/blogs" }> Blogs <span className="sr-only">current</span></Link></a>
+                            <a className="nav-link" href="/#about"> Blogs <span className="sr-only">current</span></a>
                         </li>
                         
 

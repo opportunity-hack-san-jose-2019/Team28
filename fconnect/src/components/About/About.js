@@ -3,8 +3,9 @@ import React, { Component } from "react";
 class About extends Component {
   render() {
     return (
+    <div>
       <div className="py-5">
-        <div className="about container">
+        <div className="about container" id="about">
           <div className="row">
             <div className="px-5 col-md-8 text-center mx-auto">
               <h3 className="text-primary display-4">
@@ -29,6 +30,8 @@ class About extends Component {
           </div>
         </div>
       </div>
+
+    </div>
     );
   }
 }
