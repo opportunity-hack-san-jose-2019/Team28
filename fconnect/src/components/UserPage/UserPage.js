@@ -61,13 +61,6 @@ export default class HomeCourses extends Component {
             return (<div class = "col-sm-3">
             <div class="card" id={data.name} onClick= {this.openService} style = {{width :302 ,marginLeft: 5, marginRight : 5,height: 202, marginTop : 5, marginBottom : 5}}>
             <div class="card-body" id={data.name}  onClick= {this.openService} style = {{backgroundColor : randomColor(), height : 130}}>
-<<<<<<< HEAD
-            <i class="fas fa-home"></i>
-            </div>
-            <h4 class="card-subtitle md-2 py-3 text-muted" style= {{height : 50}}> <b>{data.name} </b></h4>
-            <p class="card-text"> </p>
-            </div>
-=======
             
         </div>
 <h4 class="card-subtitle md-2 py-3 text-muted"  id={data.name}  onClick= {this.openService} style= {{height : 50}}> <b>{data.name} </b></h4>
@@ -75,7 +68,6 @@ export default class HomeCourses extends Component {
 
 
 </div>
->>>>>>> db9ed51f52a4234e87b76f21b216a6df8e5bfa20
             </div> )
 
         })
