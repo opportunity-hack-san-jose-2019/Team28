@@ -109,7 +109,7 @@ router.get('/categories',function(req,res){
 
 router.post('/addCategory',function(req,res){
   var newCategory = new CategoryServices({
-    Name : req.body.Name
+    name : req.body.name
   })
  
   newCategory.save().then((doc) => {
