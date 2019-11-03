@@ -7,6 +7,7 @@ import {Redirect} from 'react-router-dom';
 import {ROOT_URL} from '../../URLSettings';
 
 
+
 export default class AdminPage extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ export default class AdminPage extends Component {
        languages : "",
         gender : "",
         userType :"",
-
+        categories : [],
 
 
         serviceName: "",
@@ -45,6 +46,13 @@ export default class AdminPage extends Component {
   componentWillMount(){
     this.setState({
         authFlag : false
+    })
+  }
+ 
+  componentDidMount(){
+    axios.get(`${ROOT_URL}/categories`)
+    .then(res => {
+        this.setState({categories : res.data})
     })
   }
 
@@ -96,10 +104,18 @@ export default class AdminPage extends Component {
   
   }
 
+ 
+
   render(){
+
+    const options = this.state.categories.map(item => {
+        return <option> {item.name} </option>
+    })
 
    
     return (
+
+
       <div className = "LoginPage - Component">
       
       <div className="Login">
@@ -107,6 +123,8 @@ export default class AdminPage extends Component {
        <h2 align = "center">Add a Service</h2>
      </div>
         <form  align= "center">
+
+
         
           
           <Form.Group controlId="serviceName" >
@@ -146,13 +164,14 @@ export default class AdminPage extends Component {
 
           <Form.Group controlId="category" >
             <Form.Label>Category</Form.Label>
-            <Form.Control
-              value={this.state.category}
-              onChange={this.handleChange}
-              type="text"
-            />
+            <Form.Control as="select" onChange={this.handleChange}>
+                {options} 
+                
+            </Form.Control>
+           
           </Form.Group>
-          <fieldset>
+         
+        <fieldset>
   
       </fieldset>
 
