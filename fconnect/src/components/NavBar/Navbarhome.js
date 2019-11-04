@@ -3,6 +3,8 @@ import './Navbarhome.css';
 import cookie from "react-cookies";
 import Link from "react-router-dom/es/Link";
 import logo from "../../images/connect.png"
+import Redirect from "react-router-dom/es/Redirect";
+import {States} from "../../URLSettings";
 
 
     class Navbarhome extends Component {
@@ -17,7 +19,9 @@ import logo from "../../images/connect.png"
     logout = (e) =>
     {
         localStorage.removeItem("name");
+        localStorage.removeItem("userName");
         localStorage.removeItem("userType");
+        this.props.history.push("/");
     }
 
     render() {
@@ -25,6 +29,14 @@ import logo from "../../images/connect.png"
         let loggedIn = (localStorage.getItem("name") === null);
         let isAdmin = (localStorage.getItem("userType") === "mentor");
         let user =   localStorage.getItem("name");
+        let states = States.map( data => {
+            return (
+
+                   <a className="dropdown-item" href={`/stateServices/${data}`}> {data} </a>
+
+            )
+        })
+
         return (
             <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top">
 
@@ -41,37 +53,36 @@ import logo from "../../images/connect.png"
                         
 
                         {!loggedIn ? <li className="nav-item btn-link">
-<a className="nav-link"><Link to={"/userPage" }> Home <span className="sr-only">current</span></Link></a>
-</li> : ""}
+                            <a className="nav-link"><Link to={"/userPage" }> Home <span className="sr-only">current</span></Link></a>
+                            </li> : ""}
                         { isAdmin ? <li className="nav-item btn-link">
                             <a className="nav-link"> <Link to={"/addService" }> Add Service <span className="sr-only">current</span></Link></a>
-        </li> 
-        : ""}
-          { isAdmin ? <li className="nav-item btn-link">
-                            <a className="nav-link"> <Link to={"/viewServices" }> My Services <span className="sr-only">current</span></Link></a>
-        </li> 
-        : ""}
+                        </li>
+                        : ""}
+                          { isAdmin ? <li className="nav-item btn-link">
+                                            <a className="nav-link"> <Link to={"/viewServices" }> My Services <span className="sr-only">current</span></Link></a>
+                        </li>
+                        : ""}
                         <li className="nav-item btn-link">
-                            <a className="nav-link"><Link to={"/about" }> About Us <span className="sr-only">current</span></Link></a>
+                            <a className="nav-link" href="/#about"> About Us <span className="sr-only">current</span></a>
                         </li>
                         <li className="nav-item btn-link">
-                            <a className="nav-link"><Link to={"/blogs" }> Blogs <span className="sr-only">current</span></Link></a>
+                            <a className="nav-link" href="/#about"> Blogs <span className="sr-only">current</span></a>
                         </li>
                         
 
-                        {{loggedIn} &&
+                        {!loggedIn ?
                         (
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                     States
                                 </a>
                                 <div className="dropdown-menu">
-                                    <a className="dropdown-item" href="/services/ca">California</a>
-                                    <a className="dropdown-item" href="/services/wa">Washington</a>
-                                    <a className="dropdown-item" href="/services/or">Orlando</a>
+                                    {states}
                                 </div>
                             </li>
-                        )}
+                        )
+                        : ""}
                         {!loggedIn ? (
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,10 +92,11 @@ import logo from "../../images/connect.png"
                                     <a className="dropdown-item" ><Link to="/" onClick={this.logout}>Logout</Link></a>
                                 </div>
                             </li>
-                        ) : (<li className="nav-item btn-link">
-                        <a className="nav-link"><Link to={"/login" }> Login <span className="sr-only">current</span></Link></a>
-                    </li>)
+                        ) :""
                         }
+                        {loggedIn ?  <li className="nav-item btn-link">
+                        <a className="nav-link"><Link to={"/login" }> Login <span className="sr-only">current</span></Link></a>
+                    </li> : "" }
 
 
                             
@@ -92,8 +104,7 @@ import logo from "../../images/connect.png"
                     </ul>
                 </div>
             </nav>
-
-        )
+                )
     }
 }
 

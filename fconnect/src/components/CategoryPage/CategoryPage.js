@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import {ROOT_URL} from '../../URLSettings';
 import './CategoryPage.css'
+import {Redirect} from "react-router-dom";
 
 
 export default class CategoryPage extends Component {
@@ -32,24 +33,29 @@ export default class CategoryPage extends Component {
         this.props.history.push('/userPage');
         });
     }
-    render()
-    {
+    render() {
+        let isAdmin = (localStorage.getItem("userType") === "admin");
+        if (!isAdmin) {
+            return (<Redirect to='/'/>);
+        }
+        else {
 
-        return(
-            <div class="formClass">
-                <Form.Group controlId="category" >
-                <Form.Control
-                value={this.state.category}
-                placeholder = "Add a new Category"
-                onChange={this.handleChange}
-                type="text"
-                />
-                 </Form.Group>
-                 <Button type="button" class="categoryButton" onClick={this.addCategory}>Add a new Category</Button>
+            return (
+                <div class="formClass">
+                    <Form.Group controlId="category">
+                        <Form.Control
+                            value={this.state.category}
+                            placeholder="Add a new Category"
+                            onChange={this.handleChange}
+                            type="text"
+                        />
+                    </Form.Group>
+                    <Button type="button" class="categoryButton" onClick={this.addCategory}>Add a new Category</Button>
 
-            </div>
-        )
-        
+                </div>
+            )
+
+        }
     }
 
 }

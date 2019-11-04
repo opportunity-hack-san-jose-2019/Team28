@@ -16,7 +16,7 @@ export default class LandingPage extends Component {
       <div>
         <SlideshowComponent />
         <About />
-        {/*<Footer />*/}
+        <Footer />
         <Chatbot />
       </div>
     );
