@@ -9,8 +9,7 @@ var FederalSchema = new Schema({
   },
   Location: {
     type: String,
-    required: true,
-    trim: true
+ 
   },
   Description: {
     type: String,
